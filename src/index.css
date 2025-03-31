@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --FontePrincipal: 'roboto', sans-serif;
+  --FonteNome: 'lato', sans-serif;
+  --btnColor: #16DB65;
+  --white: #fff;
+  --black: #000;
+  --red: #FF0000;
+  --green: #00FF00;
+}
+
+.fontePrincipal {
+  font-family: var(--FontePrincipal);
+}
+.fonteNome {
+  font-family: var(--FonteNome);
+}
+
+
+.divRelativo{
+  background: linear-gradient(to bottom, #00000017, #000);
+}

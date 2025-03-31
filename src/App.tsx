@@ -1,4 +1,4 @@
-import imgThiago from './assets/thiagoDesktop.jpg';
+import imgThiago from './assets/thiagoDesktop.webp';
 import { FaWhatsapp } from "react-icons/fa";
 import Slider from './components/slider/slider';
 

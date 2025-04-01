@@ -7,10 +7,10 @@ export default function Resultados() {
  return (
    <section id='resultados' className='w-full h-screen flex flex-col items-center justify-center'>
 
-        <div className="absolute w-full h-[100dvh] bg-black">
+        <div className="absolute w-full h-screen bg-black">
 
 
-            <div className="absolute flex items-center justify-center gap-5 w-full h-screen">
+            <div className="absolute flex items-center justify-center gap-5 w-full h-[100dvh]">
                 <div className="relative w-full h-full overflow-hidden   flex justify-center">
                     
                     <Team color="text-[#16DB65]" fontSize="md:text-[200px]" mdFontSize="text-8xl" opacity="opacity-20" top="top-0" rotate="rotate-[20deg]" />

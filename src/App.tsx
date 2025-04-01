@@ -28,9 +28,7 @@ function App() {
               <div>
                 <h2 className='text-white fontePrincipal font-semibold text-xl'><span className='text-red-700'>ANTES</span> E <span className='text-green-500'>DEPOIS</span> DAS NOSSAS ALUNAS!</h2>
               </div>
-              <div>
-                <Slider />
-              </div>
+              
               <div className='z-50'>
                 <a
                   href='https://wa.me/5534998363232?text=Fala%20Thiago%2C%20tudo%20bem%3FTenho%20interesse%20na%20sua%20consultoria.'

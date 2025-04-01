@@ -34,7 +34,7 @@ export default function Slider() {
     };
 
     return (
-        <section className="relative w-full h-64 md:h-75 overflow-hidden">
+        <section className="relative w-full h-80 md:h-150 overflow-hidden">
             <div className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                 draggable
@@ -42,7 +42,7 @@ export default function Slider() {
                 onDragEnd={handleDrop}>
                 {images.map((image, index) => (
                     <div key={index} className="w-full h-full flex-shrink-0 flex justify-center items-center ">
-                        <img src={image} alt={`Slide ${index + 1}`} className="object-cover max-w-[300px] md:max-w-[400px] h-full rounded" />
+                        <img src={image} alt={`Slide ${index + 1}`} className="object-cover max-w-[350px] md:max-w-[700px] h-full rounded" />
                     </div>
                 ))}
             </div>

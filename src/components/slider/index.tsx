@@ -34,27 +34,30 @@ export default function Slider() {
     };
 
     return (
-        <section className="relative w-full h-80 md:h-150 overflow-hidden">
-            <div className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                draggable
-                onDragStart={handleDragStart}
-                onDragEnd={handleDrop}>
-                {images.map((image, index) => (
-                    <div key={index} className="w-full h-full flex-shrink-0 flex justify-center items-center ">
-                        <img src={image} alt={`Slide ${index + 1}`} className="object-cover max-w-[350px] md:max-w-[700px] h-full rounded" />
-                    </div>
-                ))}
-            </div>
-            <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
-                {images.map((_, index) => (
-                    <button
-                        key={index}
-                        className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'}`}
-                        onClick={() => handleBulletClick(index)}
-                    />
-                ))}
-            </div>
-        </section>
+        <div className="absolute w-full h-screen flex items-center justify-center z-[100px]">
+
+            <section className="relative w-full h-80 md:h-150 overflow-hidden">
+                <div className="flex transition-transform duration-500 ease-in-out"
+                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                    draggable
+                    onDragStart={handleDragStart}
+                    onDragEnd={handleDrop}>
+                    {images.map((image, index) => (
+                        <div key={index} className="w-full h-full flex-shrink-0 flex justify-center items-center ">
+                            <img src={image} alt={`Slide ${index + 1}`} className="object-cover max-w-[350px] md:max-w-[700px] h-full rounded" />
+                        </div>
+                    ))}
+                </div>
+                <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+                    {images.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'}`}
+                            onClick={() => handleBulletClick(index)}
+                        />
+                    ))}
+                </div>
+            </section>
+        </div>
     );
 }

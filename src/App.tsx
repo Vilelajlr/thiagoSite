@@ -9,16 +9,16 @@ function App() {
  
 
   return (
-    <main className='w-full min-h-screen flex flex-col items-center justify-center'>
+    <main className='w-full min-h-[100dvh] flex flex-col items-center justify-center'>
         
-          <div className='w-full h-screen flex flex-col items-center justify-center'>
-            <div className='absolute w-full h-screen bg-gradient-to-b from-[#0000006c] to-[#000000] z-[-10px]'></div>
+          <div className='w-full h-[100dvh] flex flex-col items-center justify-center'>
+            <div className='absolute w-full h-[100dvh] bg-gradient-to-b from-[#0000006c] to-[#000000] z-[-10px]'></div>
             <img
               src={imgThiago}
               alt="Foto do Thiago Vilela"
               className='w-full h-full object-cover z-[-10px]'
             />
-            <div className='absolute w-full h-screen flex flex-col gap-10 items-center justify-center'>
+            <div className='absolute w-full h-[100dvh] flex flex-col gap-10 items-center justify-center'>
               <div className=' flex flex-col items-center justify-center'>
                 <h1 className='text-3xl absolute top-6 text-white fonteNome font-bold '>
                     THIAGO VILELA

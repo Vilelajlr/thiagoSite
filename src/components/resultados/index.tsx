@@ -7,7 +7,7 @@ export default function Resultados() {
  return (
    <section id='resultados' className='w-full h-screen flex flex-col items-center justify-center'>
 
-        <div className="absolute w-full h-screen bg-black">
+        <div className="absolute w-full h-[100dvh] bg-black">
 
 
             <div className="absolute flex items-center justify-center gap-5 w-full h-screen">

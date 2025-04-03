@@ -1,49 +1,76 @@
 import { useState, useEffect, DragEvent } from 'react';
-import sliderImg1 from '../../assets/slider/Amanda Souza Frente.png';
-import sliderImg2 from '../../assets/slider/Lorena Junto2.png';
+import sliderImg1 from '../../assets/slider/IMG_2847.jpeg';
+import sliderImg2 from '../../assets/slider/IMG_3927.jpeg';
+import sliderImg3 from '../../assets/slider/Lorena-Junto2-2.jpeg';
+import sliderImg4 from '../../assets/slider/V2-ad.jpeg';
+import sliderImg5 from '../../assets/slider/V2-ad2G.jpeg';
 
 export default function Slider() {
     const images: string[] = [
         sliderImg1,
         sliderImg2,
+        sliderImg3,
+        sliderImg4,
+        sliderImg5,
     ];
 
     const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [dragStartX, setDragStartX] = useState<number>(0);
+    const [isVisible, setIsVisible] = useState<boolean>(false);
 
-    // Troca de imagem automática
     useEffect(() => {
+        const handleScroll = () => {
+            const carouselElement = document.getElementById('carousel');
+            if (carouselElement) {
+                const rect = carouselElement.getBoundingClientRect();
+                const isInViewport = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                setIsVisible(isInViewport);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isVisible) return;
+
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % images.length);
-        }, 5000); // Muda a cada 3 segundos
+        }, 10000); // Muda a cada 8 segundos
 
         return () => clearInterval(interval);
-    }, [images.length]);
+    }, [images.length, isVisible]);
 
     const handleBulletClick = (index: number): void => {
         setCurrentIndex(index);
     };
 
     const handleDragStart = (event: DragEvent<HTMLDivElement>): void => {
-        event.dataTransfer.setData('text/plain', String(currentIndex));
+        setDragStartX(event.clientX);
     };
 
-    const handleDrop = (event: DragEvent<HTMLDivElement>): void => {
-        const startIndex = parseInt(event.dataTransfer.getData('text/plain'));
-        const offset = startIndex > currentIndex ? -1 : 1;
+    const handleDragEnd = (event: DragEvent<HTMLDivElement>): void => {
+        const dragEndX = event.clientX;
+        const offset = dragEndX < dragStartX ? 1 : -1;
         setCurrentIndex((prev) => (prev + offset + images.length) % images.length);
     };
 
     return (
-        <div className="absolute w-full h-screen flex items-center justify-center z-[100px]">
+        <div id="carousel" className="absolute w-full h-screen flex items-center justify-center z-20">
 
             <section className="relative w-full h-80 md:h-150 overflow-hidden">
                 <div className="flex transition-transform duration-500 ease-in-out"
                     style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                     draggable
                     onDragStart={handleDragStart}
-                    onDragEnd={handleDrop}>
+                    onDragEnd={handleDragEnd}>
                     {images.map((image, index) => (
-                        <div key={index} className="w-full h-full flex-shrink-0 flex justify-center items-center ">
+                        <div key={index} className="w-full h-full flex-shrink-0 flex justify-center items-center">
                             <img src={image} alt={`Slide ${index + 1}`} className="object-cover max-w-[350px] md:max-w-[700px] h-full rounded" />
                         </div>
                     ))}

@@ -1,4 +1,4 @@
-import { useState, useEffect, DragEvent } from 'react';
+import { useState, useEffect, DragEvent, TouchEvent } from 'react';
 import sliderImg1 from '../../assets/slider/IMG_2847.jpeg';
 import sliderImg2 from '../../assets/slider/IMG_3927.jpeg';
 import sliderImg3 from '../../assets/slider/Lorena-Junto2-2.jpeg';
@@ -17,6 +17,7 @@ export default function Slider() {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [dragStartX, setDragStartX] = useState<number>(0);
     const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [touchStartX, setTouchStartX] = useState<number>(0);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -41,7 +42,7 @@ export default function Slider() {
 
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % images.length);
-        }, 10000); // Muda a cada 8 segundos
+        }, 8000);
 
         return () => clearInterval(interval);
     }, [images.length, isVisible]);
@@ -60,6 +61,16 @@ export default function Slider() {
         setCurrentIndex((prev) => (prev + offset + images.length) % images.length);
     };
 
+    const handleTouchStart = (event: TouchEvent<HTMLDivElement>): void => {
+        setTouchStartX(event.touches[0].clientX);
+    };
+
+    const handleTouchEnd = (event: TouchEvent<HTMLDivElement>): void => {
+        const touchEndX = event.changedTouches[0].clientX;
+        const offset = touchEndX < touchStartX ? 1 : -1;
+        setCurrentIndex((prev) => (prev + offset + images.length) % images.length);
+    };
+
     return (
         <div id="carousel" className="absolute w-full h-screen flex items-center justify-center z-20">
 
@@ -68,7 +79,9 @@ export default function Slider() {
                     style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                     draggable
                     onDragStart={handleDragStart}
-                    onDragEnd={handleDragEnd}>
+                    onDragEnd={handleDragEnd}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}>
                     {images.map((image, index) => (
                         <div key={index} className="w-full h-full flex-shrink-0 flex justify-center items-center">
                             <img src={image} alt={`Slide ${index + 1}`} className="object-cover max-w-[350px] md:max-w-[700px] h-full rounded" />

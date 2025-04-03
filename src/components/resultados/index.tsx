@@ -7,8 +7,8 @@ export default function Resultados() {
  return (
    <section id='resultados' className='w-full h-[100dvh] flex flex-col items-center justify-center relative'>
 
-        <div className="absolute top-30 md:top-15">
-            <h1 className="text-white fontePrincipal font-bold text-lg md:text-3xl"><span className="text-red-600">ANTES</span> E <span className="text-green-600">DEPOIS</span> DAS NOSSAS ALUNAS!</h1>
+        <div className="absolute top-10 md:top-15">
+            <h1 className="text-white fontePrincipal font-bold text-xl text-center md:text-3xl"><span className="text-red-600">ANTES</span> E <span className="text-green-600">DEPOIS</span> DOS ALUNOS(A) DA CONSULTORIA!</h1>
         </div>
 
 

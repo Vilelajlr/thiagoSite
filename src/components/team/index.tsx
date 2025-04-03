@@ -25,7 +25,7 @@ interface TeamProps {
   }: TeamProps) {
     return (
       <h1
-        className={`absolute whitespace-nowrap font-bold 
+        className={`absolute whitespace-nowrap font-bold fonteNome
           ${color ? color : ""} 
           ${fontSize ? fontSize : ""} 
           ${mdFontSize ? mdFontSize : ""} 

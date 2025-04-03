@@ -72,7 +72,7 @@ export default function Slider() {
     };
 
     return (
-        <div id="carousel" className="absolute w-full h-screen flex items-center justify-center z-20">
+        <div id="carousel" className=" w-full  flex items-center justify-center z-20 overflow-hidden">
 
             <section className="relative w-full h-80 md:h-150 overflow-hidden">
                 <div className="flex transition-transform duration-500 ease-in-out"
@@ -88,7 +88,7 @@ export default function Slider() {
                         </div>
                     ))}
                 </div>
-                <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+                <div className="absolute bottom-3 md:bottom-5 left-0 right-0 flex justify-center space-x-2">
                     {images.map((_, index) => (
                         <button
                             key={index}

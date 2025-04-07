@@ -110,6 +110,7 @@ export default function Slider() {
         <div id="carousel" className="w-full flex items-center justify-center z-20 overflow-hidden">
             <section
                 className="relative w-full h-80 md:h-150 overflow-hidden"
+                style={{ touchAction: 'pan-y' }}
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}

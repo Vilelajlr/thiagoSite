@@ -1,4 +1,4 @@
-import { useState, useEffect, DragEvent, TouchEvent } from 'react';
+import { useState, useEffect, useRef, PointerEvent } from 'react';
 import sliderImg0 from '../../assets/slider/costasanapagot.jpeg';
 import sliderImg1 from '../../assets/slider/IMG_2847.jpeg';
 import sliderImg2 from '../../assets/slider/IMG_3927.jpeg';
@@ -28,10 +28,19 @@ export default function Slider() {
         sliderImg11,
     ];
 
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [dragStartX, setDragStartX] = useState<number>(0);
-    const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [touchStartX, setTouchStartX] = useState<number>(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [startX, setStartX] = useState<number | null>(null);
+    const [dragX, setDragX] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+    const resetAutoSlide = () => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 8000);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,54 +63,77 @@ export default function Slider() {
     useEffect(() => {
         if (!isVisible) return;
 
-        const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % images.length);
-        }, 8000);
+        resetAutoSlide();
 
-        return () => clearInterval(interval);
-    }, [images.length, isVisible]);
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [isVisible]);
 
     const handleBulletClick = (index: number): void => {
         setCurrentIndex(index);
+        resetAutoSlide();
     };
 
-    const handleDragStart = (event: DragEvent<HTMLDivElement>): void => {
-        setDragStartX(event.clientX);
+    const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
+        setStartX(e.clientX);
+        setIsDragging(true);
     };
 
-    const handleDragEnd = (event: DragEvent<HTMLDivElement>): void => {
-        const dragEndX = event.clientX;
-        const offset = dragEndX < dragStartX ? 1 : -1;
-        setCurrentIndex((prev) => (prev + offset + images.length) % images.length);
+    const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+        if (!isDragging || startX === null) return;
+        const delta = e.clientX - startX;
+        setDragX(delta);
     };
 
-    const handleTouchStart = (event: TouchEvent<HTMLDivElement>): void => {
-        setTouchStartX(event.touches[0].clientX);
+    const handlePointerUp = () => {
+        if (!isDragging) return;
+
+        const threshold = 50;
+
+        if (dragX > threshold) {
+            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+        } else if (dragX < -threshold) {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }
+
+        resetAutoSlide();
+
+        setStartX(null);
+        setDragX(0);
+        setIsDragging(false);
     };
 
-    const handleTouchEnd = (event: TouchEvent<HTMLDivElement>): void => {
-        const touchEndX = event.changedTouches[0].clientX;
-        const offset = touchEndX < touchStartX ? 1 : -1;
-        setCurrentIndex((prev) => (prev + offset + images.length) % images.length);
-    };
+    const totalOffset = -currentIndex * 100 + (dragX / window.innerWidth) * 100;
 
     return (
-        <div id="carousel" className=" w-full  flex items-center justify-center z-20 overflow-hidden">
-
-            <section className="relative w-full h-80 md:h-150 overflow-hidden">
-                <div className="flex transition-transform duration-500 ease-in-out"
-                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                    draggable
-                    onDragStart={handleDragStart}
-                    onDragEnd={handleDragEnd}
-                    onTouchStart={handleTouchStart}
-                    onTouchEnd={handleTouchEnd}>
+        <div id="carousel" className="w-full flex items-center justify-center z-20 overflow-hidden">
+            <section
+                className="relative w-full h-80 md:h-150 overflow-hidden"
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerLeave={handlePointerUp}
+            >
+                <div
+                    className={`flex ${isDragging ? '' : 'transition-transform duration-500 ease-in-out'}`}
+                    style={{ transform: `translateX(${totalOffset}%)` }}
+                >
                     {images.map((image, index) => (
-                        <div key={index} className="w-full h-full flex-shrink-0 flex justify-center items-center">
-                            <img src={image} alt={`Slide ${index + 1}`} className="object-cover max-w-[350px] md:max-w-[700px] h-full rounded" />
+                        <div
+                            key={index}
+                            className="w-full h-full flex-shrink-0 flex justify-center items-center select-none"
+                        >
+                            <img
+                                src={image}
+                                alt={`Slide ${index + 1}`}
+                                className="object-cover max-w-[350px] md:max-w-[700px] h-full rounded"
+                                draggable={false}
+                            />
                         </div>
                     ))}
                 </div>
+
                 <div className="absolute bottom-3 md:bottom-5 left-0 right-0 flex justify-center space-x-2">
                     {images.map((_, index) => (
                         <button

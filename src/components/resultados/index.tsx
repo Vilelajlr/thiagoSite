@@ -9,7 +9,7 @@ export default function Resultados() {
 
         <div className="flex flex-col items-center justify-center gap-20  w-full h-full z-10 pt-10 pb-10">
             <div className="">
-                <h1 className="text-white fontePrincipal font-bold text-xl text-center md:text-3xl"><span className="text-red-600">ANTES</span> E <span className="text-green-600">DEPOIS</span> DOS ALUNOS(A) DA CONSULTORIA!</h1>
+                <h1 className="text-white fontePrincipal font-bold text-xl text-center md:text-3xl">Alguns <span className="text-green-600">RESULTADOS</span> dos alunos da consultoria </h1>
             </div>
             
             <Slider />

@@ -38,11 +38,9 @@ function App() {
                 </div>
               </div>
             
-              <section className='flex items-end justify-center gap-5 absolute bottom-5'>
-                <Arrows />
-                  
-                    <a href='#resultados' className='text-lg text-white opacity-70 fontePrincipal font-semibold hover:opacity-100 delay-100 transition-opacity duration-200 ease-in-out z-60 cursor-pointer'>Veja os Resultados</a>
-                  
+              <section className='flex items-end justify-center gap-5 absolute bottom-10'>
+                <Arrows />            
+                    <a href='#resultados' className='text-xl text-white opacity-70 fontePrincipal font-semibold hover:opacity-100 delay-100 transition-opacity duration-200 ease-in-out z-60 cursor-pointer'>Veja os Resultados</a>
                 <Arrows />
             
               </section>

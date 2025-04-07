@@ -32,7 +32,7 @@ export default function Resultados() {
 
             <div className="absolute flex items-center justify-center gap-5 w-full h-[100dvh] -z-10">
                 <div className="relative w-full h-full overflow-hidden   flex justify-center">
-                    <img src={imgPage2} alt="" className="object-cover w-full opacity-[10%]" />
+                    <img src={imgPage2} alt="" className="object-cover w-full opacity-[20%]" />
 
                 </div>
             </div>

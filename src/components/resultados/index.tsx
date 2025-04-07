@@ -1,7 +1,10 @@
 
 import { FaWhatsapp } from "react-icons/fa";
 import Slider from "../slider";
-import Team from "../team";
+import imgPage2 from "../../assets/imgPage2.png";
+
+import { BsFillArrowDownSquareFill } from "react-icons/bs";
+
 
 export default function Resultados() {
  return (
@@ -9,7 +12,7 @@ export default function Resultados() {
 
         <div className="flex flex-col items-center justify-center gap-20  w-full h-full z-10 pt-10 pb-10">
             <div className="">
-                <h1 className="text-white fontePrincipal font-bold text-xl text-center md:text-3xl">Alguns <span className="text-green-600">RESULTADOS</span> dos alunos da consultoria </h1>
+                <h1 className="text-white fontePrincipal font-bold text-xl text-center md:text-3xl leading-8">Alguns <span className="text-green-950 bg-green-200 p-1">RESULTADOS</span> dos alunos da consultoria <span className="inline-block ml-1"><BsFillArrowDownSquareFill color="lightgreen" size={25} /> </span> </h1> 
             </div>
             
             <Slider />
@@ -29,22 +32,8 @@ export default function Resultados() {
 
             <div className="absolute flex items-center justify-center gap-5 w-full h-[100dvh] -z-10">
                 <div className="relative w-full h-full overflow-hidden   flex justify-center">
-                    
-                    <Team color="text-[#16DB65]" fontSize="md:text-[200px]" mdFontSize="text-[150px]" opacity="opacity-20" top="top-0" rotate="rotate-[20deg]" />
-                    <Team color="text-transparent" fontSize="md:text-[200px]" mdFontSize="text-[150px]" opacity="opacity-50" top="top-6" rotate="-rotate-[20deg]" stroke="stroke-2" strokeWidth="stroke-gray-300" />
+                    <img src={imgPage2} alt="" className="object-cover w-full opacity-[10%]" />
 
-
-
-                    <Team color="text-[#16DB65]" fontSize="md:text-[200px]" mdFontSize="text-[150px]" opacity="opacity-20" top="top-60" rotate="rotate-[20deg]" />
-                    <Team color="text-transparent" fontSize="md:text-[200px]" mdFontSize="text-[150px]" opacity="opacity-50" top="top-80" rotate="-rotate-[20deg]" stroke="stroke-2" strokeWidth="stroke-gray-300" />
-
-
-
-                    <Team color="text-[#16DB65]" fontSize="md:text-[200px]" mdFontSize="text-[150px]" opacity="opacity-20" top="top-130" rotate="rotate-[20deg]" />
-                    <Team color="text-transparent" fontSize="md:text-[200px]" mdFontSize="text-[150px]" opacity="opacity-50" top="top-150" rotate="-rotate-[20deg]" stroke="stroke-2" strokeWidth="stroke-gray-300" />
-                    
-
-                    
                 </div>
             </div>
         </div>
